@@ -4,7 +4,7 @@ var app = express();
 
 // route per home
 app.get('/home', function (req, res) {
-    res.send("Text Response");
+    res.send("Test Test Test");
 });
 
 // route per user 
