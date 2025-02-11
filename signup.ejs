@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="sq">
+    <script src="/script.js"></script>
+
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1>Regjistrimi</h1>
+    <form action="/signup" method="POST">
+        <input type="text" name="name" placeholder="Emri" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Fjalkalimi" required>
+        <button type="submit">Regjistrohu</button>
+    </form>
+    <a href="/login">Ke ndonje llogari? Kyçu</a>
+</body>
+</html>
