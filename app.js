@@ -1,28 +1,43 @@
-const express=require('express');
-const bodyParser=require('body-parser');
+const express = require('express');
+const app = express();
+const cors = require("cors");
+const path = require('path'); 
+const PORT = 3000;
 
-// Konfigurimi i express per me perdor EJS
-const app=express();
-app.set('view engine','ejs');
-app.use(bodyParser.urlencoded ({extended: true}))
+app.use(cors()); 
 
-// Renderimi i index.ejs
-app.get('/',(req,res)=>{
-    res.ender('index');
-})
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Path per perpunimin e formes (Sign Up Form)
-app.post('/', (req,res)=> {
-    const username = req.body.username;
-    const password = req.body.password;
- 
-    console.log("Username:" + username);
-    console.log("Password:" + password);
- 
-    res.render('Welcome', {emri: username, pw:password})
- })
- 
- app.listen(3000, ()=>{
-     console.log('Serveri eshte startuar ne porten 3000')
- })
+const jokes = [
+    {
+        setup: "Çka i ka thënë semafori kerrit?",
+        punchline: "Mos me shiko se qitash ndrrona 😂"
+    },
+    {
+        setup: "A e ke ni foren ma t're?",
+        punchline: "Ska dal hala 🤓"
+    },
+    {
+        setup: "Si pijaven kompjuterat?",
+        punchline: "Me screenshots"
+    },
+];
+
+
+app.get('/jokes', (req, res) => {
+    const randomIndex = Math.floor(Math.random() * jokes.length);
+    const joke = jokes[randomIndex];
+    res.json({ joke: `${joke.setup} ${joke.punchline}` });
+});
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Serveri po punon ne portin: http://localhost:${PORT}`);
+});
+
+
 

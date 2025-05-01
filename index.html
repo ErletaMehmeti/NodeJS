@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakatë</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .joke {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shaka</h1>
+        <button id="getJokeBtn">Merr Shakën</button>
+        <div class="joke" id="jokeDisplay"></div>
+    </div>
+
+    <script>
+        // Kërkoni shaka nga backend
+        document.getElementById('getJokeBtn').addEventListener('click', function() {
+            fetch('http://localhost:3000/jokes')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('jokeDisplay').innerText = data.joke;
+                })
+                .catch(error => {
+                    console.error('Ka ndodhur një gabim:', error);
+                });
+        });
+    </script>
+</body>
+</html>
